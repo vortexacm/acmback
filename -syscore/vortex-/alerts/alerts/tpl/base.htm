@@ -1,0 +1,34 @@
+<!--@ if:alerts @-->
+<table cellpadding="0" cellspacing="0" border="0" class="vtxTableList toRound" id="autaTableView">
+
+<tbody>
+<!--@ loop:alerts @-->
+<tr class="<!-- tag:alerts[].class /-->">
+<td width="60%" ><!-- tag:alerts[].mode /--></td>
+<th width="44%"><!-- tag:alerts[].total /--> Alertas</th>
+<th width="1%"><a class="pendChecks toIcon appComom" href="javascript:void(0)" rel="<!-- tag:alerts[].go /-->">[+]</a></th>
+</tr>
+<!--/@ loop:alerts @-->
+</tbody>
+
+</table>
+<!-- else:alerts /-->
+<div class="vtxAlerts vtxSysConfirm toRound toScreen" style="width:60%; padding-right:10px">Não há pendencias ou alertas no momento</div>
+
+<!--/@ if:alerts @-->
+
+<script>
+
+	// open user alerts
+	$(".pendChecks").on("click", function(e) {
+			
+			e.preventDefault();
+			
+			$(this).vtxRemove()
+			
+			vtxPluginRead( $(this).attr('rel') )
+	
+	});
+
+
+</script>

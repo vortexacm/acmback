@@ -1,0 +1,21 @@
+<form action="/pass-recovery-system,0,3,4,request.htm" method="post" onsubmit="return false" id="vFormFormData" class="toRound" autocomplete="off" >
+
+    <ul>
+    <li>Digite seu e-mail</li>
+    <li><input type="text" value="" name="userMail" id="userMail" class="vtxFormReqs" size="30" maxlength="150px" /></li>
+    
+    <li>Digite seu CPF</li>
+    <li><input name="userPass" type="password" class="vtxFormReqs" id="userPass" value="" size="30" maxlength="20" /></li>
+ 
+     <li class="captcha">
+    <iframe name="captcha" src="" width="270" height="60" marginheight="0" marginwidth="0" frameborder="0" id="capctha" class="toRound"></iframe> 
+    <a target="captcha" href="javascript:void(0)" id="reload" class="toRound toRight frmAccess"></a>
+    </li>
+   
+    <li>Digite o código exibido acima</li>
+    <li><input name="userCode" type="text" class="vtxFormReqs" id="userCode" value="" size="30" maxlength="6" /></li>
+     
+    <li><a href="javascript:void(0)" id="vFormFormActivate" class="toRound frmAccess">Reenviar Senha</a></li>
+    <input type="hidden" name="activeform" value="1"  />
+
+</ul>

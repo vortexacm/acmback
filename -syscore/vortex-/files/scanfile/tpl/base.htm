@@ -1,0 +1,79 @@
+<p class="toRound headers">Você está em: <!-- tag:navigator /--></p>
+
+<!--@ if:file @-->
+<form action="" method="post" id="vtxMfiles">
+    
+    <div class="filePages toTable toRound">
+        
+        <input type="button" value="" id="filezRemover" class="toRound toLeft" />
+        <label class="toLeft"><input type="checkbox" name="mover" value="" /> Marcar/Desmarcar todos</label>
+        
+        <div id="paginator" class="toRight">
+            <!--@ loop:pages @-->
+            <a class="toBlock toRound" href="javascript:void(0)" rel="<!-- tag:pages[].u /-->"><!-- tag:pages[].n /--></a>
+            <!--/@ loop:pages @-->
+        </div>
+    
+    </div>
+
+    <table width="100%" cellspacing="0" id="fileTables">
+    <thead>
+    	<tr>
+        	<th width="3%"></th>
+            <th width="15%">Enviado em</th>
+            <th width="20%">Tipo</th>
+            <th width="30%">Arquivo</th>
+            <th width="1%"></th>
+        	
+        </tr>
+    </thead>
+    
+    <tbody>
+    <!--@ loop:file @-->
+        <tr>
+        <th><input type="checkbox" name="move[]" value="<!-- tag:file[].insert /-->" /></th>
+        <td><!-- tag:file[].date /--></td>
+        <td><!-- tag:file[].tipo /--></td>
+        <td>
+        <a href='javascript:void(0)' rel='<!-- tag:file[].insert /-->' class='toRound vfiles toBlock'>
+        <!-- tag:file[].name /-->
+        </a>
+        </td>
+        <td><a href="javascript:void(0)" rel="<!-- tag:file[].insert /-->" class='toRound vfiles toBlock vFileBtns insert'></a></td> 
+        </tr>
+    <!--/@ loop:file @-->
+    </tbody>
+    
+    <tfoot></tfoot>
+    </table>
+
+    <div class="filePages toTable toRound">
+        
+        <input type="button" value="" id="filezRemover" class="toRound toLeft" />
+        <label class="toLeft"><input type="checkbox" name="mover" value="" /> Marcar/Desmarcar todos</label>
+        
+        <div id="paginator" class="toRight">
+            <!--@ loop:pages @-->
+            <a class="toBlock toRound" href="javascript:void(0)" rel="<!-- tag:pages[].u /-->"><!-- tag:pages[].n /--></a>
+            <!--/@ loop:pages @-->
+        </div>
+    
+    </div>
+
+</form>
+
+<!-- else:file /-->
+	<p class="vtxAlerts vtxSysImportant">Não há arquivos ou imagens disponíveis nesta pasta</p>
+<!--/@ if:file @-->
+
+<script>
+$(function(){
+
+// get select picutre
+	
+	$("#fileTables tbody").vtxUppRows();
+	$("#fileTables").vtxCloneFeets();
+
+
+})
+</script>

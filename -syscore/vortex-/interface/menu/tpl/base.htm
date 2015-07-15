@@ -1,0 +1,32 @@
+<!--@ if:apps @-->
+
+<!--@ loop:apps @-->
+<li style="background-image:url(<!-- tag:apps[].icon /-->)" class='vpluginUsers'>
+    <a href="javascript:void(0)" class="vPluginStart"><!-- tag:apps[].ptitle /--></a>
+    <div class="subMenu">
+        <ul id="vplugCon">
+        <!--@ loop:apps[].plugins @-->
+            <li>
+                <a href="javascript:void(0)"  class="toBlock" style="background-image:url(<!-- tag:apps[].plugins[].icon /-->)"><!-- tag:apps[].plugins[].modulo /--></a>
+                <ul class="levela" id="mod">
+                    <!--@ loop:apps[].plugins[].actions @-->
+                        <li>
+                            <a href="javascript:void(0)" class="toBlock"><!-- tag:apps[].plugins[].actions[].apps /--></a>
+                            <ul class="levelb">
+                                <!--@ loop:apps[].plugins[].actions[].plugs @-->
+                                    <li><a href="javascript:void(0)" class="act" rel="<!-- tag:apps[].plugins[].actions[].plugs[].tgt /-->"><!-- tag:apps[].plugins[].actions[].plugs[].name /--></a></li>
+                                <!--/@ loop:apps[].plugins[].actions[].plugs @-->
+                            </ul>
+                        </li>
+                    <!--/@ loop:apps[].plugins[].actions @-->
+                </ul>
+            </li>
+        <!--/@ loop:apps[].plugins @-->	
+        </ul>
+    </div>    
+</li>
+<!--/@ loop:apps @-->
+
+<!-- else:apps /-->
+<h3 class="systemError">Modulos não puderam ser carregados</h3>
+<!--/@ if:apps @-->

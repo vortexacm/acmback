@@ -1,0 +1,67 @@
+<!-- tag:pluginExtras /-->
+<script type="text/javascript">
+$(function(e) {
+
+	$(".screenPrint").on("click",function(){
+	
+		window.print()	
+		
+	})
+	
+	// save current url
+	 $("#vtxUserNavigate").val().length > 0 &&  $(".vtxModalContainer").length == 0  ?  $(".toControlers").show() :"";
+	 $(".vtxModalContainer .toControlers").hide();
+	 
+	 vCurrentInserter = '<!-- tag:vPluginAdd /-->';
+	
+});
+
+</script>
+<div id="vtxAppProcess">
+
+
+<!--@ if:vPluginViewer @-->
+	<div class="appTitle">
+    	<span class="toBlock"><!-- tag:appName /--></span>
+    
+        <div class="toBold toRight toControlers">
+            <a href="#" class="toBlock debuged"></a>
+            <a class="toIcon toBlock debug" href="javascript:void(0)" title="Ligar/Desligar Debug"></a>  
+            <a class="toIcon toBlock appPrint screenPrint" href="javascript:void(0)" title="Imprimir"></a>  
+            <a class="toIcon toBlock appMail" href="javascript:void(0)" rel="<!-- tag:vPluginTicket /-->" title="Abrir Chamado"></a>  
+            <a class="toIcon toBlock appTtk"  href="javascript:void(0)" rel="<!-- tag:vPluginHelper /-->" title="Ajuda Online"></a>
+            <a class="toIcon toBlock reload" href="<!-- tag:requestedURI /-->" title="Atualizar Janela"></a>
+            <a class="toIcon toBlock appFind" href="javascript:void(0)" rel="" title="Ativar Filtros" id="vtxComomFilters"></a>
+            <a class="toIcon toBlock closer top" href="javascript:void(0)" title="Fechar Janela"></a>     	
+        </div>
+        
+    </div>
+	
+    <div id="appMain">
+    <!-- tag:appParse /-->
+    </div>
+	
+    
+<!-- else:vPluginViewer /-->
+<script>
+	window.onbeforeunload = function(){ return 'Você poderá perder os dados não salvos. Deseja continuar';}
+</script>
+
+<div class="appTitle">
+    <span class="toBlock"><!-- tag:appName /--></span>
+    
+    <div class="toBold toRight toControlers">
+    <a class="toIcon toBlock appMail" href="javascript:void(0)" rel="<!-- tag:vPluginTicket /-->"  title="Abrir Chamado"></a> 
+    <a class="toIcon toBlock toLeft appTtk" href="javascript:void(0)" rel="<!-- tag:vPluginHelper /-->" title="Ajuda Online"></a> 
+    <a class="toIcon toBlock  toLeft closer inplugin" href="javascript:void(0)" title="Fechar Janela"></a>
+    </div>
+
+</div>
+    
+<div id="appMain">
+<div id="formReceiveErros"></div>
+<!-- tag:appParse /-->
+</div>
+
+<!--/@ if:vPluginViewer @-->
+</div>

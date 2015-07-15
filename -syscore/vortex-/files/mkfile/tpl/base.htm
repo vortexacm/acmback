@@ -1,0 +1,110 @@
+<div id="formReceiveErros"></div>
+
+<form action="/make-file,5,3,create.htm" enctype="multipart/form-data" id="vtxFMData" name="vtxFMData">
+<table width="100%" class="formData">
+
+    <thead>
+    <tr>
+    <th colspan="2" class="toRound">Carregar novo arquivo</th>
+    </tr>
+    </thead>    
+
+    <!--@ if:hd @-->
+    <tr>
+    <th width="30%">&nbsp;</th>
+    <td width="70%">
+    <input name="hd" type="checkbox" id="hd" value="1" />
+    Carregar arquivo no tamanho original
+    </td>
+    </tr>
+    <!--/@ if:hd @-->
+
+    <tr>
+      <th>Arquivos Permitidos</th>
+      <td><!-- tag:types /--></td>
+    </tr>
+    
+    <tr>
+      <th>Destino do Arquivo</th>
+      <td><!-- tag:dir /--></td>
+    </tr>
+    
+    <tr>
+    <th>Carregar Arquivo</th>
+    <td width="442">
+    <input type="file" name="userfile" id="userfile" /> Tamanho máximo
+    </td>
+    </tr>
+    
+    <tr>
+    <td>&nbsp;</td>
+    <td>
+    <input type="button" name="button" id="vFormSubmit" class="vFormSub vFormButtons" value="Carregar Arquivo" />
+    <input type="hidden" name="userInsert" value="1" />
+    <input type="hidden" name="direct" id="direct" value="<!-- tag:dir /-->" />
+    <input type="hidden" name="tpo" id="tpo" value="<!-- tag:tpo /-->" />
+    </td>
+    </tr>
+
+</table>
+
+</form>
+
+<script>
+$(function(){
+	
+	
+	$("#userfile").vUppValidator({
+			vpTarget:"#vFormSubmit",
+			vpTypes : /<!-- tag:uppTypes /-->/
+	});
+
+  	$("#vFormSubmit").on('click',function(e) {
+		
+		e.preventDefault()
+
+		$("#dir").val(vtxDirs)
+		
+		if( typeof tinymce != 'undefined'){
+			tinymce.triggerSave();
+		}
+
+		$("#vtxFMData").vCallUpp({
+					
+					uppHiddenName	: "postiframe",
+					uppMessenger	: "#formReceiveErros",
+					uppProccess 	: "formProcess toRound",
+					uppSuccess  	: "formSuccess toRound",
+					uppError		: "formProcess toRound",
+					upOnStart		: 'Carregando',
+					upOnError		: 'Falha ao Carregar',
+					upOnFinish		: 'Carregado com sucesso',
+					upField	   		: '#userfile',
+				
+				},function(ret){
+										
+				if(ret[0] == 0 ){
+				
+					$("#formReceiveErros").html("<h2>Erro no cadastro</h2>" + ret).removeClass('formProcess').addClass('formPointer');
+					$('#vtxFMData').show()
+				
+				}else if(ret[0] == 1){
+				
+					//alert(vtxDirs)
+					
+					vtxListDirs();
+					vtxListFiles();
+
+
+				}else{
+					
+					$("#formReceiveErros").html("<h2>Erro no cadastro</h2>" + ret).removeClass('formProcess').addClass('formPointer');
+					$('#vtxFMData').show()
+				}
+					
+		})
+		
+    });	
+	
+})
+</script>

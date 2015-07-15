@@ -1,0 +1,111 @@
+<style>
+#helpWindow{display:table; padding:10px 1%; width:98%; display:table;}
+#helpWindow h3{font:italic 14px "Trebuchet MS", Arial, Helvetica, sans-serif; padding:6px; background:#f60; color:#fff }
+#inHelp h3{margin:5px 0; }
+#inHelp{ min-width:20%; width:200px; background:#eaeaea; padding:0 5px}
+#inHelp li{clear:both; padding:2px 0; margin:3px 0; width:200px; display:table; background:#fff}
+#inHelp li span{width:170px; height:20px; line-height:20px; vertical-align:middle; font-weight:normal}
+#inHelp li a{float:left;}
+
+#inHelpCon{min-width:74%; padding:5px; height:400px; overflow:auto; background:#eaeaea}
+#inHelpCon h3{ font-size:17px}
+#inHelpCon th,#inHelpCon td{padding:5px}
+#inHelpCon th{padding-left:10px; width:160px}
+
+.toIcon.reload {background-position: -19px 0;}
+.toIcon.closer {background-position: -38px 0;}
+
+</style>
+<div id="helpWindow" class="toTable">
+
+<div id="inHelp" class="toLeft toRound">
+<h3 class="toRound">Aplicativos Padrão</h3>
+
+<ul>
+	<li class="toRound"><a class="toIcon toBlock closer" href="javascript:void(0)"></a> <span class="toBlock toRight">Fechar Janelas</span></li>
+    <li class="toRound"><a class="toIcon toBlock reload" href="javascript:void(0)"></a> <span class="toBlock toRight">Atualizar Janela</span></li>
+    <li class="toRound"><a class="toIcon toBlock appFind" href="javascript:void(0)"></a> <span class="toBlock toRight">Pesquisar registros</span></li>
+    <li class="toRound"><a class="toIcon toBlock regEdt" href="javascript:void(0)"></a> <span class="toBlock toRight">Alterar/Editar Registros </span></li>
+    <li class="toRound"><a class="toIcon toBlock regDel" href="javascript:void(0)"></a> <span class="toBlock toRight">Excluir Registros</span></li>
+    <li class="toRound"><a class="toIcon toBlock appView" href="javascript:void(0)"></a> <span class="toBlock toRight">Recursos Adicionas</span></li>
+    <li class="toRound"><a class="toIcon toBlock appInfo" href="javascript:void(0)"></a> <span class="toBlock toRight">Configurações Adicionais</span></li>
+    <li class="toRound"><a class="toIcon toBlock appOpt" href="javascript:void(0)"></a> <span class="toBlock toRight">Propriedades</span></li>
+    <li class="toRound"><a class="toIcon toBlock appComom" href="javascript:void(0)"></a> <span class="toBlock toRight">Configurações</span></li>
+    <li class="toRound"><a class="toIcon toBlock appFoto" href="javascript:void(0)"></a> <span class="toBlock toRight">Carregar Fotos</span></li>
+    <li class="toRound"><a class="toIcon toBlock appVideo" href="javascript:void(0)"></a> <span class="toBlock toRight">Carregar Videos</span></li>
+    <li class="toRound"><a class="toIcon toBlock appMail" href="javascript:void(0)"></a> <span class="toBlock toRight">Novas Mensagens</span></li>
+    <li class="toRound"><a class="toIcon toBlock appRMail" href="javascript:void(0)"></a> <span class="toBlock toRight">Mensagem Lida</span></li>
+    <li class="toRound"><a class="toIcon toBlock appTtk" href="javascript:void(0)"></a> <span class="toBlock toRight">Ajuda Online</span></li>
+
+</ul>
+
+</div>
+
+<div class="toRight toRound" id="inHelpCon">
+<!--@ if:helpinc @-->
+<!-- tag:helpinc /-->
+
+<!-- else:helpinc /-->
+<table width="100%" class="toScreen">
+    <thead>
+    <tr>
+    <td colspan="2"><h3 class="toRound">Vortex ACM</h3></td>
+    </tr>
+    </thead>
+    
+    <tr>
+    <th width="240">Versão do Sistema</th>
+    <td><!-- tag:vsysVersion /--></td>
+    
+    </tr>
+    <tr>
+    <th>Plataforma Base</th>
+    <td><!-- tag:vsysMode /--></td>
+    </tr>
+    <tr>
+    <th>Módulo #ID</th>
+    <td><!-- tag:vsysID /--></td>
+    </tr>
+    <tr>
+    <th>Código do Contrato</th>
+    <td><!-- tag:vsysContract /--></td>
+    </tr>
+    <tr>
+    <th>Licenciado para</th>
+    <td><!-- tag:vsysCompany /--></td>
+    </tr>
+    <tr>
+    <th>Inscrição</th>
+    <td><!-- tag:vsysCNPJ /--></td>
+    </tr>
+    <tr>
+    <th valign="top">Endereço</th>
+    <td valign="top"><!-- tag:vsysAddress /--></td>
+    </tr>
+    <tr>
+    <th valign="top">Domínio(s) Licenciado(s)</th>
+    <td valign="top"><!-- tag:vsyDomain /--></td>
+    </tr>
+
+    <tr>
+    <th>Licenciado em:</th>
+    <td><!-- tag:vsyActivate /--></td>
+    </tr>
+    
+    <tr>
+    <th>Validade</th>
+    <td><!-- tag:vsyExpire /--></td>
+    </tr>
+    <tr>
+    <th colspan="2">Chave da Licença</th>
+    </tr>
+    </table>
+    
+    <pre style="padding: 0 30px">
+<!-- tag:vsysKey /-->
+    </pre>
+<!--/@ if:helpinc @-->
+</div>
+
+</div>
+<div class="toClear"></div>

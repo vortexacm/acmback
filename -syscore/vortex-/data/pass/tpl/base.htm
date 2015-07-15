@@ -1,0 +1,73 @@
+<div class="appTitle">
+    <span class="toBlock">Vortex ACM 2.0 :: Atualizar senha </span>
+</div>
+
+<script>
+$(function(e) {
+
+	// submit form data
+	$("#vFormActivate").click(function(e) {
+        
+        e.preventDefault()
+		if( tinymce != undefined ){
+			tinymce.triggerSave();
+		}
+
+		$("#vxFormData").vFormSend({
+			
+			formDebug : formDebuger,
+			formRequest:"vtxFormReqs",
+			formSuccess:"formSuccess toRound",
+			formProcess:"formProcess toRound",
+			formReceive:"#formReceiveErros",
+			formProcessTXT	:"Processando dados aguarde um instante...",
+					
+		})
+
+    });
+	
+	$("body").on('click',"div#formReceiveErros",function(){
+		
+		$(this).html('').empty().removeClass('formPointer formProcess').hide()
+		
+	})
+
+});
+
+</script>
+	
+<div id="formReceiveErros"></div>
+
+<div id="vUsrCanvas">
+    
+    <form action="<!-- tag:formact /-->" onsubmit="return false" id="vxFormData" >
+    
+    <table class="formData toScreen">
+    
+    <tr>
+    <th scope="row">Senha Atual *</th>
+    <td><input name="passact" type="password" id="passact" size="25" maxlength="20" class="vtxFormReqs" /></td>
+    </tr>
+    
+    <tr>
+    <th scope="row">Senha </th>
+    <td><input name="pass" type="password" id="pass" size="25" maxlength="20" class="vtxFormReqs" /></td>
+    </tr>
+    
+    <tr>
+    <th scope="row">Confirme Senha</th>
+    <td><input name="passt" type="password" id="passt" size="25" maxlength="20" class="vtxFormReqs" /></td>
+    </tr>
+    
+    <tr>
+    <th scope="row">&nbsp;</th>
+    <td>
+    <input type="submit" name="vFormActivate" id="vFormActivate" class="vFormSub vFormButtons" value="Enviar Dados" /></td>
+    </tr>
+    
+    </table>
+    <input type="hidden" name="userInsert" value="1" />
+    <input type="hidden" name="userID" value="1" />
+    </form>
+
+</div>

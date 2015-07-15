@@ -1,0 +1,139 @@
+<style>
+#helpWindow{display:table; padding:10px 1%; width:98%; display:table;}
+#helpWindow h3{font:italic 14px "Trebuchet MS", Arial, Helvetica, sans-serif; padding:6px; background:#f60; color:#fff }
+#inHelp h3{margin:5px 0; }
+#inHelp{ min-width:20%; width:200px; background:#eaeaea; padding:0 5px}
+#inHelp li{clear:both; padding:2px 0; margin:3px 0; width:200px; display:table; background:#fff}
+#inHelp li span{width:170px; height:20px; line-height:20px; vertical-align:middle; font-weight:normal}
+#inHelp li a{float:left;}
+
+#inHelpCon{min-width:74%; padding:5px; height:380px; overflow:auto; background:#eaeaea}
+#inHelpCon h3{ font-size:17px}
+#inHelpCon th,#inHelpCon td{padding:5px}
+#inHelpCon th{padding-left:10px; width:160px}
+
+.toIcon.reload {background-position: -19px 0;}
+.toIcon.closer {background-position: -38px 0;}
+
+#orderContent{padding:5px}
+#orderContent .vtxTab ul{padding:10px}
+#orderContent .vtxTab li{padding:5px 10px}
+</style>
+
+<script>
+$(function(){
+
+	// start tabs
+	applyTabs("#orderContent")
+
+
+})
+</script>
+
+
+<div id="orderContent" class="">
+
+<div class="vtxTabs">
+
+    <ul class="autaTabControl">
+    <!--@ if:helpinc @-->
+	<li>Ajuda do Módulo</li>
+    <!--/@ if:helpinc @-->
+
+    <!--@ if:helpconf @-->
+	<li>Configurações</li>
+    <!--/@ if:helpconf @-->
+
+    <li>Tutoriais</li>
+    <li>Suporte Técnico</li>
+    <li>Licença</li>   
+
+    </ul>
+
+    <!--@ if:helpinc @-->
+    <div class="vtxTab">    
+    <!-- tag:helpinc /-->
+    </div>
+    <!--/@ if:helpinc @-->
+
+    <!--@ if:helpconf @-->
+    <div class="vtxTab">    
+    <!-- tag:helpconf /-->
+    </div>
+    <!--/@ if:helpconf @-->
+
+    
+    <div class="vtxTab">
+    
+      <p>Tutorias</p>
+      <p>Video Aulas</p>
+    </div>
+    
+    <div class="vtxTab">
+    
+      <p>Solicitar Suporte</p>
+    
+    </div>
+
+
+
+	<div class="vtxTab" id="inHelpCon">
+    
+    
+        <table width="100%" class="toScreen">
+        <thead>
+        <tr>
+        <td colspan="2"><h3 class="toRound">Vortex ACM <!-- tag:vsysVersion /--> - <!-- tag:vsysMode /--></h3></td>
+        </tr>
+        </thead>
+        
+        <tbody>
+        <tr>
+        <th width="240">Módulo #ID</th>
+        <td><!-- tag:vsysID /--></td>
+        </tr>
+        <tr>
+        <th>Código do Contrato</th>
+        <td><!-- tag:vsysContract /--></td>
+        </tr>
+        <tr>
+        <th>Licenciado para</th>
+        <td><!-- tag:vsysCompany /--></td>
+        </tr>
+        <tr>
+        <th>Inscrição</th>
+        <td><!-- tag:vsysCNPJ /--></td>
+        </tr>
+        <tr>
+        <th valign="top">Endereço</th>
+        <td valign="top"><!-- tag:vsysAddress /--></td>
+        </tr>
+        <tr>
+        <th valign="top">Domínio(s) Licenciado(s)</th>
+        <td valign="top"><!-- tag:vsyDomain /--></td>
+        </tr>
+        
+        <tr>
+        <th>Licenciado em:</th>
+        <td><!-- tag:vsyActivate /--></td>
+        </tr>
+        
+    <tr>
+    <th>Validade</th>
+    <td><!-- tag:vsyExpire /--></td>
+    </tr>
+        
+    <tr>
+    <th>&nbsp;</th>
+    <td>
+    <pre style="padding: 0 30px"><!-- tag:vsysKey /--></pre>
+    </td>
+    </tr>
+    
+    </tbody>
+    
+    </table>
+    </div>    
+ </div>
+ </div>       
+        

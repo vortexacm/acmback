@@ -1,0 +1,93 @@
+<div class="appTitle">
+    <span class="toBlock">Vortex ACM 2.0 :: Atualizar Privilégios  </span>
+    
+
+</div>
+
+<script>
+$(document).ready(function(e) {
+
+
+	// submit form data
+	$("#vFormActivate").on('click',function(e) {
+        
+		e.preventDefault();
+		$("div #menuModules ul").html("<li>Carregando...</li>");
+		
+		
+		$("#vxFormData").vFormSend({
+			formDebug : formDebuger,
+			formRequest:"vtxFormReqs",
+			formSuccess:"formSuccess toRound",
+			formProcess:"formProcess toRound",
+			formReceive:"#formReceiveErros",
+			formProcessTXT	:"Processando dados aguarde um instante...",
+
+		},function(){
+			
+					// get actualized menu
+					$.get("/vortex-menu,100,1,"+vCurrentPackager+",request.htm",function(data){
+					
+						$("div #menuModules ul").html(data);
+					
+					})
+					
+					// close current window
+					$(this).vtxRemove();
+		
+		});
+
+    });
+
+
+	$("body").on('click',"div#formReceiveErros",function(){
+		
+		$(this).html('').empty().removeClass('formPointer formProcess').hide()
+		
+	})
+
+
+
+}); //jquery end
+
+</script>
+
+<div id="formReceiveErros"></div>
+
+<form action="<!-- tag:formAct /-->" onsubmit="return false" id="vxFormData" >
+
+        <table class="formData toScreen">
+        <tr>
+        <td colspan="2">&nbsp;</td>
+        </tr>
+        
+        <tr>
+        <th scope="row">Usuário Vortex</th>
+        <td><!-- tag:nome /--></td>
+        </tr>
+        
+        <tr>
+        <th scope="row">Grupo de Acesso</th>
+        <td><!-- tag:grupo /--></td>
+        </tr>
+        
+        <tr>
+        <th scope="row">Última Atualização</th>
+        <td><!-- tag:atualizacao /--> hs</td>
+        </tr>
+        
+
+        <tr>
+        <th scope="row">&nbsp;</th>
+        <td>
+        <input type="button" name="vFormActivate" id="vFormActivate" class="vFormSub vFormButtons" value="Atualizar Privilegios" />
+        </td>
+        </tr>
+        
+        </table>
+
+<input type="hidden" name="userInsert" value="1" />
+<input type="hidden" name="userID" value="1" />
+<input type="hidden" name="userPath" value="<!-- tag:path /-->" />
+
+</form>

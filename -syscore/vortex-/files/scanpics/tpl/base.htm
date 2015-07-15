@@ -1,0 +1,65 @@
+
+<p class="toRound headers">Você está em: <!-- tag:navigator /--></p>
+
+<!--@ if:file @-->
+<form action="" method="post" id="vtxMfiles">
+    <div class="filePages toTable toRound">
+        
+        <input type="button" value="" id="filezRemover" class="toRound toLeft" />
+        <label class="toLeft"><input type="checkbox" name="mover" value="" /> Marcar/Desmarcar todos</label>
+        
+        <div id="paginator" class="toRight">
+            <!--@ loop:pages @-->
+            <a class="toBlock toRound" href="javascript:void(0)" rel="<!-- tag:pages[].u /-->"><!-- tag:pages[].n /--></a>
+            <!--/@ loop:pages @-->
+        </div>
+    
+    </div>
+
+    <ul id="setPictures">
+    <!--@ loop:file @-->
+        <li>
+        <label class="toBlock">
+            <input type="checkbox" name="move[]" value="<!-- tag:file[].insert /-->" /> Excluir
+        </label>
+        <a href='javascript:void(0)' rel='<!-- tag:file[].insert /-->' class='toRound picture toBlock' style='background:url(<!-- tag:file[].thumb /-->) 50% 50% no-repeat'></a>
+        <div><!-- tag:file[].name /--></div>
+      
+        </li>
+    <!--/@ loop:file @-->
+    </ul>
+
+</form>
+
+<!-- else:file /-->
+	<p class="vtxAlerts vtxSysImportant">Não há imagens nesta pasta</p>
+<!--/@ if:file @-->
+
+<script>
+/*
+$(function(){
+
+// get select picutre
+
+
+	$("#vtxMfiles input[name='mover']").change(function(){
+		
+		var checked_status = this.checked;
+
+		$("#vtxMfiles ul input:checkbox").each(function(){
+			this.checked = checked_status;
+		});
+		
+	});
+	
+	// remove files
+	$("#filezRemover").on('click',function(){
+	
+		alert( defDirs ) 	
+		
+	})	
+
+
+})
+*/
+</script>

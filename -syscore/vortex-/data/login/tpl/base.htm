@@ -1,0 +1,101 @@
+<div class="appTitle">
+	<span class="toBlock">Vortex ACM 2.0 ::Sessão Expirada</span>
+</div>
+
+<div class="toScreen" style="width:70%">
+
+<div id="formReceiverErros" class="vtxAlerts vtxSysBreak">Sua sessão expirou. Faça o login novamente</div>
+
+<form action="/inside-access,0,200,login.htm" method="post" id="vxFormInsider" class="toRound" autocomplete="off" >
+
+<table class="formData toScreen">
+	
+	<tbody>
+	
+    <tr>
+	<th>E-mail</th>
+    <td>
+    <input type="text" name="userMail" id="userMail" class="vFormFormReqs" size="30" maxlength="150" value="" placeholder="Digite seu e-mail" />
+	</td>
+	</tr>
+
+	<tr>
+    <th>Senha</th>
+	<td>
+    <input type="password" name="userPass" id="userPass" class="vFormFormReqs" size="30" maxlength="20" value="" placeholder="Digite sua senha" />
+	</td>
+	</tr>
+
+	<tr>
+	<td colspan="2">
+    <a href="javascript:void(0)" id="vFormFormActivator" class="vFormButtons vFormSub toRight">Acessar Vortex ACM</a>
+	</td>
+	</tr>
+
+	</tbody>
+</table>
+    
+    <input type="hidden" name="activeform" value="1"  />
+</form>
+
+</div>
+
+<script>
+$(function(){
+	
+	// get current user
+	var currentMailer = vtxCookieGet('accessMail') != null && vtxCookieGet('accessMail').length > 0 ? decodeURIComponent( vtxCookieGet('accessMail')) : "";
+	$("#userMail").val( currentMailer );
+
+	// search form press enter
+	$("#vxFormInsider").on('keydown',function(e){
+	
+		var key = e.charCode || e.keyCode || 0;
+		
+			 key == 13 ? $("#vFormFormActivator").trigger('click') : "";
+			
+	});
+	
+	// send data login	
+	$("#vFormFormActivator").on('click',function(e) {
+		
+		if( typeof tinymce != 'undefined'){
+			tinymce.triggerSave();
+		}
+		
+		$("#formReceiverErros").removeClass('vtxAlerts vtxSysBreak');
+		
+	
+		$("#vxFormInsider").vFormSend({
+			
+			formRequest:"vtxFormReqs",
+			formSuccess:"formSuccess toRound",
+			formProcess:"formProcess toRound",
+			formReceive:"#formReceiverErros"
+		
+		},function(x){
+			
+			if(x[0] == 1){
+				
+				if( $(".mainInsideLoggin").length > 0) {
+				
+					$(".mainInsideLoggin").vtxRemove();
+				
+				}else{	
+					
+					detectHash();
+				}
+	
+			}else{
+				
+				$("#formReceiverErros").addClass('formPointer').html("Falha ao enviar dados. " + x);
+			
+			}
+			
+		})
+	
+	});
+
+	
+});
+</script>

@@ -1,0 +1,365 @@
+<div class="appTitle">
+    <span class="toBlock">Vortex ACM 2.0 :: Atualizar Dados  </span>
+    
+
+</div>
+
+<script>
+$(document).ready(function(e) {
+
+	applyTabs();
+	
+	$('#nascimento').mask("99/99/9999")
+	$('#cpf').mask("999.999.999-99")
+
+
+	// submit form data
+	$("#vFormActivate").on('click',function(e) {
+        e.preventDefault()
+		
+		
+		$("#vxFormData").vFormSend({
+			formDebug : formDebuger,
+			formRequest:"vtxFormReqs",
+			formSuccess:"formSuccess toRound",
+			formProcess:"formProcess toRound",
+			formReceive:"#formReceiveErros",
+			formProcessTXT	:"Processando dados aguarde um instante...",
+
+		},function(data){
+		
+			$("#formReceiveErros").html("").removeClass('formProcess formSuccess toRound');
+			
+			$("#vFormSteps").show();	
+			$("#userdir").val(data[1])
+			
+		})
+
+    });
+
+
+	$("body").on('click',"div#formReceiveErros",function(){
+		
+		$(this).html('').empty().removeClass('formPointer formProcess').hide()
+		
+	})
+
+// ######################################
+// crop images
+// ######################################
+$("#vtxBtnCropp").click(function(e) {
+        e.preventDefault()
+		
+		if( tinymce != undefined ){
+			tinymce.triggerSave();
+		}
+		
+		$("#vtxCropp").vFormSend({
+			formDebug : formDebuger,
+			formRequest:"vtxFormReqs",
+			formSuccess:"formSuccess toRound",
+			formProcess:"formProcess toRound",
+			formReceive:"#formReceiveErros",
+			formProcessTXT	:"Processando dados aguarde um instante... 4",
+		},function(foto){
+			
+			if(foto[0] == 1){		
+			
+				jcrop_api.destroy();
+				
+				$("#formReceiveErros").html("Cadastro concluido com sucesso").removeClass('formProcess').addClass('formSuccess toRound');
+			
+			}else{
+				
+				$("#formReceiveErros").html("<h2>1002 :: Erro no cadastro:</h2>" + ret[0]).removeClass('formProcess').addClass('formPointer');
+				$('#vxFormUpper').show();
+			}
+		})
+
+});
+
+
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// global btn functions
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+$("#btnClose").click(function(e){
+	
+		e.preventDefault();
+		$('form').each(function() {
+            $(this).hide()
+        });
+		
+		$("#formReceiveErros").html("Cadastro concluido com sucesso").removeClass('formProcess').addClass('formSuccess toRound');
+
+})
+
+
+
+// show steps
+$("#vtxUpp").click(function(e){
+	
+		e.preventDefault();
+		$('form').each(function() {
+            $(this).hide()
+        });
+		
+		$("#vxFormUpper").show();	
+})
+
+// show upload
+$("#vFormMenu").click(function(e){
+	
+		e.preventDefault();
+		
+		$('form').each(function() {
+            $(this).hide()
+        });
+		
+		$("#vFormSteps").show();
+		$("#vFormSteps input").show()	
+})
+
+
+// submit upper form
+
+	$("#userfile").vUppValidator({'vpTarget':"#vxBTNupp"})
+	
+	// envia formulario para  upp
+	$("#vxBTNupp").on('click',function(e) {
+        
+		e.preventDefault()
+
+		if( typeof tinymce != 'undefined'){
+			tinymce.triggerSave();
+		}
+
+		
+		$("#vxFormUpper").vCallUpp({
+					uppHiddenName	: "postiframe",
+					uppMessenger	: "#formReceiveErros",
+					uppProccess 	: "formProcess toRound",
+					uppSuccess  	: "formSuccess toRound",
+					uppError		: "formProcess toRound",
+					upOnStart		: 'Carregando',
+					upOnError		: 'Falha ao Carregar',
+					upOnFinish		: 'Carregado com sucesso',
+					upField	   		: '#userfile',
+				
+				},function(ret){
+				
+					
+			if(ret[0] == 0 || ret[0] == 'undefined'){
+				
+				$('#vxFormUpper').show()
+				$("#formReceiveErros")
+				.html("<h2>1003 :: Erro no cadastro</h2>" + ret[1])
+				.removeClass('formProcess')
+				.addClass('formPointer')
+				.click(function(e) {
+					$(this).hide()
+				});
+				
+			
+			}else if(ret[0] == 1){
+				
+				$("#arquivo").val(ret[1])
+				$("#udir").val(ret[2])
+	
+				$('#vxFormUpper').hide();
+				$("#formReceiveErros").html("").removeClass('formProcess');
+				$('#vtxCropp').show();
+				
+				$('#fotografia').attr('src',ret[3]).load(function(){
+					
+					jcrop_api = $.Jcrop('#fotografia', {
+					setSelect: [0,0,250,250 ],
+							minSize:[150,150],
+							aspectRatio:1,
+							onChange: showCoords,
+							onSelect: showCoords
+					});
+				
+				})
+			
+				
+			}else{
+				$('#vxFormUpper').show();
+				$("#formReceiveErros")
+				.html("<h2>1001 :: Erro no cadastro:</h2>" + ret[0])
+				.removeClass('formProcess')
+				.addClass('formPointer');
+				
+			}
+					
+		})
+				
+		
+    });
+
+
+
+
+}); //jquery end
+
+</script>
+
+<div id="formReceiveErros"></div>
+
+<form action="<!-- tag:formAct /-->" onsubmit="return false" id="vxFormData" >
+
+<div id="vUsrCanvas">
+
+<div class="vtxTabs">
+
+    <ul class="autaTabControl">
+        <li>Perfil</li>
+        <li>Acesso</li>
+        <li>Foto</li>
+      <li>Finalizar</li>
+    </ul>
+
+    <div class="vtxTab"> 
+        <table class="formData toScreen">
+        <tr>
+        <td colspan="2">Campos obrigatórios são indicados por *</td>
+        </tr>
+        
+        <tr>
+        <th scope="row">Sexo</th>
+        <td>
+        <!--@ if:sexo @-->
+        <input type="radio" name="sexo" id="radio5" value="1" checked="checked" /> Masculino
+        <input name="sexo" type="radio" id="radio6" value="0"  /> Feminino
+		<!-- else:sexo /-->
+        <input type="radio" name="sexo" id="radio5" value="1" /> Masculino
+        <input name="sexo" type="radio" id="radio6" value="0" checked="checked" /> Feminino
+		<!--/@ if:sexo @-->
+        </td>
+        </tr>
+        
+        <tr>
+        <th scope="row">Nome *</th>
+        <td><input name="nome" type="text" class="vtxFormReqs" id="nome" size="50" maxlength="150" value="<!-- tag:nome /-->" /></td>
+        </tr>
+        
+        <tr>
+        <th scope="row">CPF * </th>
+        <td><input name="cpf" type="text" id="cpf" size="25" maxlength="18" class="vtxFormReqs" value="<!-- tag:cpf /-->" /></td>
+        </tr>
+        
+        <tr>
+        <th scope="row">Nascimento *</th>
+        <td><input name="nascimento" type="text" id="nascimento" size="25" maxlength="18" class="vtxFormReqs" value="<!-- tag:nascimento /-->" /></td>
+        </tr>
+        
+        </table>
+    </div>
+
+
+    <div class="vtxTab"> 
+        <table class="formData toScreen">
+        
+        <tr>
+        <th scope="row">E-mail *</th>
+        <td><input name="email" type="text" class="vtxFormReqs" id="email" size="50" maxlength="150" value="<!-- tag:email /-->" /></td>
+        </tr>
+        
+        <tr>
+        <th scope="row">E-mail Adicional</th>
+        <td><input name="email2" type="text" id="email2" size="50" maxlength="150" value="<!-- tag:email2 /-->" /></td>
+        </tr>
+        
+        </table>
+    </div>
+    
+    <div class="vtxTab"> 
+		<div align="center">
+        	<img src="<!-- tag:foto /-->" />
+        </div>
+	</div>
+
+    
+    <div class="vtxTab"> 
+        <table class="toScreen">
+        <tr>
+        <th scope="row">&nbsp;</th>
+        <td>
+        <input type="button" name="vFormActivate" id="vFormActivate" class="vFormSub vFormButtons" value="Enviar Dados" />
+        </td>
+        </tr>
+        
+        </table>
+    </div>
+
+</div>
+
+<input type="hidden" name="userInsert" value="1" />
+<input type="hidden" name="userID" value="1" />
+
+</div>
+</form>
+
+</div>
+
+
+<form method="post" action="<!-- tag:formAct /-->" enctype="multipart/form-data" id="vFormSteps" name="vFormSteps" class="toHide">
+    <table width="600" class="formData toScreen">
+    <tr>
+    <th>Dados enviados com sucesso!</th>
+    </tr>
+    
+    <tr>
+    <td>O que você deseja fazer agora ?</td>
+    </tr>
+    <tr>
+    <th><ul class="buttonContainer">
+    <li><input type="submit" name="vtxUpp" id="vtxUpp" class="vFBTNdefault vFormSub vFormButtons" value="Anexar Foto" /></li>
+    <li><input type="button" name="btnClose" id="btnClose" class="vFBTNdefault vFormButtons vFormServices"  value="Apenas Concluir" /></li>
+    </ul>
+    </th>
+    </tr>
+    </table>
+    
+    <input type="hidden" id="userdir" value="">
+</form>
+
+<form method="post" action="<!-- tag:formAct /-->" enctype="multipart/form-data" id="vxFormUpper" name="vxFormUpper" class="toHide">
+   
+   <ul class="buttonContainer">
+   		<li><input type="file" name="userfile" id="userfile" ></li>
+   		<li class="toClear"><input type="button" id="vxBTNupp" class="vFBTNdefault vFormButtons vFormSub" value="Enviar Foto" disabled ></li>
+   		<li class="toClear"><input type="button" id="vFormMenu" class="vFBTNdefault vFormButtons vFormServices" value="Voltar ao Menu"></li>
+   </ul>
+   
+   <input type="hidden" value="1" name="upp" >
+   <input type="hidden" name="userdir" id="userdir" value="" >
+
+</form>
+
+
+
+<form action="<!-- tag:formAct /-->" enctype="multipart/form-data" id="vtxCropp" class="toHide" >
+    
+    <table width="800" class="formData toScreen">
+    <tr>
+    <th>Selecione a área da foto que será usada no site</th>
+    </tr>
+    <tr>
+    <th><img src="/corefix/image/load.gif" id="fotografia" /></th>
+    </tr>
+    <tr>
+    <th>
+    <input type="submit" name="vxBTNupp" id="vtxBtnCropp" class="vFormSub vFormButtons" value="Cortar e Salvar" />
+    </th>
+    </tr>
+    </table>
+    
+    <input type="hidden" size="4" id="x1" name="x1" />
+    <input type="hidden" size="4" id="y1" name="y1" />
+    <input type="hidden" size="4" id="w" name="w" />
+    <input type="hidden" size="4" id="h" name="h" />
+    <input type="hidden" value="1" name="arquivo" id="arquivo" />
+    <input type="hidden" value="1" name="udir" id="udir" />
+    <input type="hidden" name="position" id="position" value="" />
+    
+</form>
